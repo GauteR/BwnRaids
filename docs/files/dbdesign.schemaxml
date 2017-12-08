@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">gaute_bwnraids</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="characters" view="colnames">
+<left>843</left>
+<top>259</top>
+<width>128</width>
+<height>241</height>
+<sql_create_table>CREATE TABLE `characters` (
+  `char_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_fk` int(20) unsigned NOT NULL,
+  `class_fk` int(20) unsigned NOT NULL,
+  `char_name` varchar(128) NOT NULL,
+  `char_realm` varchar(128) NOT NULL,
+  `char_mainrole` int(20) unsigned NOT NULL,
+  `char_offrole1` int(20) unsigned DEFAULT NULL,
+  `char_offrole2` int(20) unsigned DEFAULT NULL,
+  `char_offrole3` int(20) unsigned DEFAULT NULL,
+  `char_type` int(1) NOT NULL COMMENT '1= Main, 2= Alt',
+  PRIMARY KEY (`char_id`),
+  KEY `fk_char_mainrole` (`char_mainrole`),
+  KEY `fk_char_offrole1` (`char_offrole1`),
+  KEY `fk_char_offrole2` (`char_offrole2`),
+  KEY `fk_char_offrole3` (`char_offrole3`),
+  KEY `fk_class` (`class_fk`),
+  KEY `fk_user` (`user_fk`),
+  CONSTRAINT `fk_user` FOREIGN KEY (`user_fk`) REFERENCES `users` (`user_id`),
+  CONSTRAINT `fk_char_mainrole` FOREIGN KEY (`char_mainrole`) REFERENCES `roles` (`role_id`),
+  CONSTRAINT `fk_char_offrole1` FOREIGN KEY (`char_offrole1`) REFERENCES `roles` (`role_id`),
+  CONSTRAINT `fk_char_offrole2` FOREIGN KEY (`char_offrole2`) REFERENCES `roles` (`role_id`),
+  CONSTRAINT `fk_char_offrole3` FOREIGN KEY (`char_offrole3`) REFERENCES `roles` (`role_id`),
+  CONSTRAINT `fk_class` FOREIGN KEY (`class_fk`) REFERENCES `classes` (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="classes" view="colnames">
+<left>1016</left>
+<top>194</top>
+<width>113</width>
+<height>133</height>
+<sql_create_table>CREATE TABLE `classes` (
+  `class_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `class_name` varchar(16) NOT NULL,
+  `class_icon` varchar(512) DEFAULT NULL,
+  `class_style` text,
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="mm_allowed_roles" view="colnames">
+<left>889</left>
+<top>509</top>
+<width>106</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `mm_allowed_roles` (
+  `allowed_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `class_fk` int(20) unsigned NOT NULL,
+  `role_fk` int(20) unsigned NOT NULL,
+  PRIMARY KEY (`allowed_id`),
+  KEY `fk_mm_role` (`role_fk`),
+  KEY `fk_mm_class` (`class_fk`),
+  CONSTRAINT `fk_mm_class` FOREIGN KEY (`class_fk`) REFERENCES `classes` (`class_id`),
+  CONSTRAINT `fk_mm_role` FOREIGN KEY (`role_fk`) REFERENCES `roles` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="ranks" view="colnames">
+<left>163</left>
+<top>434</top>
+<width>141</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `ranks` (
+  `rank_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `rank_name` varchar(32) NOT NULL,
+  `rank_style` text,
+  `rank_permission` int(8) NOT NULL,
+  PRIMARY KEY (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="roles" view="colnames">
+<left>657</left>
+<top>540</top>
+<width>107</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `roles` (
+  `role_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(16) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="users" view="colnames">
+<left>440</left>
+<top>414</top>
+<width>122</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `users` (
+  `user_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_fk_rank` int(20) unsigned NOT NULL,
+  `user_email` varchar(256) NOT NULL,
+  `user_pass` varchar(512) NOT NULL,
+  `user_discord` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `fk_user_rank` (`user_fk_rank`),
+  CONSTRAINT `fk_user_rank` FOREIGN KEY (`user_fk_rank`) REFERENCES `ranks` (`rank_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="events" view="colnames">
+<left>606</left>
+<top>88</top>
+<width>178</width>
+<height>197</height>
+<sql_create_table>CREATE TABLE `events` (
+  `event_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `leader_fk` int(20) unsigned NOT NULL,
+  `event_name` varchar(256) NOT NULL,
+  `event_date` datetime NOT NULL,
+  `event_note` text,
+  `event_permitted_chars` int(11) NOT NULL DEFAULT '1' COMMENT '1= Mains, 2= All',
+  `event_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`event_id`),
+  KEY `fk_event_leader` (`leader_fk`),
+  CONSTRAINT `fk_event_leader` FOREIGN KEY (`leader_fk`) REFERENCES `characters` (`char_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="attendees" view="colnames">
+<left>393</left>
+<top>211</top>
+<width>113</width>
+<height>166</height>
+<sql_create_table>CREATE TABLE `attendees` (
+  `attendee_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `event_fk` int(20) unsigned NOT NULL,
+  `char_fk` int(20) unsigned NOT NULL,
+  `status_fk` int(20) unsigned NOT NULL,
+  `signup_note` text,
+  `signup_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`attendee_id`),
+  KEY `fk_attendee_char` (`char_fk`),
+  KEY `fk_attendee_event` (`event_fk`),
+  KEY `fk_attendee_status` (`status_fk`),
+  CONSTRAINT `fk_attendee_char` FOREIGN KEY (`char_fk`) REFERENCES `characters` (`char_id`),
+  CONSTRAINT `fk_attendee_event` FOREIGN KEY (`event_fk`) REFERENCES `events` (`event_id`),
+  CONSTRAINT `fk_attendee_status` FOREIGN KEY (`status_fk`) REFERENCES `statuses` (`status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="statuses" view="colnames">
+<left>171</left>
+<top>90</top>
+<width>119</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `statuses` (
+  `status_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `status_name` varchar(16) NOT NULL,
+  PRIMARY KEY (`status_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
