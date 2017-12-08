@@ -13,7 +13,7 @@ use Yii;
  * @property string $user_pass
  * @property string $user_discord
  *
- * @property MmUserChars[] $mmUserChars
+ * @property Characters[] $characters
  * @property Ranks $userFkRank
  */
 class Users extends \yii\db\ActiveRecord
@@ -58,9 +58,9 @@ class Users extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMmUserChars()
+    public function getCharacters()
     {
-        return $this->hasMany(MmUserChars::className(), ['user_fk' => 'user_id']);
+        return $this->hasMany(Characters::className(), ['user_fk' => 'user_id']);
     }
 
     /**
