@@ -173,7 +173,8 @@ class Users extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($user_pass)
     {
-        return $this->user_pass === md5($user_pass);
+        //return $this->user_pass === md5($user_pass);
+        return $this->user_pass === $user_pass;
     }
 
     /**
