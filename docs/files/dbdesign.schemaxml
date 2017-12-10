@@ -76,7 +76,7 @@
   `rank_style` text,
   `rank_permission` int(8) NOT NULL,
   PRIMARY KEY (`rank_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4</sql_create_table>
 </table>
 <table name="roles" view="colnames">
 <left>657</left>
@@ -93,13 +93,16 @@
 <left>440</left>
 <top>414</top>
 <width>122</width>
-<height>163</height>
+<height>215</height>
 <sql_create_table>CREATE TABLE `users` (
   `user_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_fk_rank` int(20) unsigned NOT NULL,
+  `user_screen_name` varchar(64) DEFAULT NULL,
   `user_email` varchar(256) NOT NULL,
   `user_pass` varchar(512) NOT NULL,
   `user_discord` varchar(64) DEFAULT NULL,
+  `user_access_token` varchar(128) NOT NULL,
+  `user_auth_key` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`),
   KEY `fk_user_rank` (`user_fk_rank`),
   CONSTRAINT `fk_user_rank` FOREIGN KEY (`user_fk_rank`) REFERENCES `ranks` (`rank_id`)

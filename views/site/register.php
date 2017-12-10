@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-$this->title = 'Sign In';
+$this->title = 'Register';
 
 $fieldOptions1 = [
     'options' => ['class' => 'form-group has-feedback'],
@@ -19,15 +19,15 @@ $fieldOptions2 = [
 ];
 ?>
 
-<div class="login-box">
-    <div class="login-logo">
+<div class="register-box">
+    <div class="register-logo">
         <a href="#"><b>Bwn</b>Raids</a>
     </div>
     <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+    <div class="register-box-body">
+        <p class="login-box-msg">Register to start your session</p>
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
+        <?php $form = ActiveForm::begin(['id' => 'register-form', 'enableClientValidation' => false]); ?>
 
         <?= $form
             ->field($model, 'user_email', $fieldOptions1)
@@ -40,22 +40,18 @@ $fieldOptions2 = [
             ->passwordInput(['placeholder' => $model->getAttributeLabel('user_pass')]) ?>
 
         <div class="row">
-            <div class="col-xs-8">
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-            </div>
+            <div class="col-xs-8">&nbsp;</div>
             <!-- /.col -->
             <div class="col-xs-4">
-                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Register', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'register-button']) ?>
             </div>
             <!-- /.col -->
         </div>
 
 
         <?php ActiveForm::end(); ?>
-
-        <a href="/site/forgot">I forgot my password</a><br>
-        <a href="/site/register" class="text-center">Register a new membership</a>
-
+        <br>
+        <a href="/site/login" class="text-center">Already registered? Log in instead.</a>
     </div>
-    <!-- /.login-box-body -->
-</div><!-- /.login-box -->
+    <!-- /.register-box-body -->
+</div><!-- /.register-box -->
