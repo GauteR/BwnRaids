@@ -7,9 +7,14 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 use app\models\LoginForm;
 use app\models\RegisterForm;
 use app\models\ProfileForm;
+use app\models\Events;
+use app\models\Classes;
+use app\models\Characters;
 
 class SiteController extends Controller
 {
@@ -62,7 +67,44 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $eventsQuery = Events::find();//->where(['>', 'event_date', new Expression('NOW()')]);
+
+        $eventsProvider = new ActiveDataProvider([
+            'query' => $eventsQuery,
+            'pagination' => [
+                'pagesize' => 3
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'event_date' => SORT_ASC,
+                    'event_name' => SORT_ASC,
+                ]
+            ]
+        ]);
+
+        if(!Yii::$app->user->isGuest) {
+            $charactersQuery = Characters::find()->where(['user_fk' => (int)Yii::$app->user->identity->user_id, 'char_type' => 1]);
+
+            $charactersProvider = new ActiveDataProvider([
+                'query' => $charactersQuery
+            ]);
+
+            $characters = $charactersProvider->getModels();
+            if(!is_null($characters) && count($characters) > 0) {
+                for($i = 0; $i < 1; $i++) {
+                    $classQuery = Classes::find()->where(['class_id' => (int)$characters[$i]->class_fk ]);
+                }
+                
+                $classProvider = new ActiveDataProvider([
+                    'query' => $classQuery
+                ]);
+                return $this->render('index', ['events' => $eventsProvider->getModels(), 'characters' => $characters, 'main_class' => $classProvider->getModels() ]);
+            } else {
+                return $this->render('index', ['events' => $eventsProvider->getModels() ]);
+            }
+        } else {
+            return $this->render('index', ['events' => $eventsProvider->getModels() ]);
+        }
     }
 
     /**

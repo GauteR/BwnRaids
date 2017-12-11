@@ -66,4 +66,21 @@ class Classes extends \yii\db\ActiveRecord
     {
         return $this->hasMany(MmAllowedRoles::className(), ['class_fk' => 'class_id']);
     }
+    
+    /**
+     * @inheritdoc
+     * @return ClassesQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ClassesQuery(get_called_class());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
 }
