@@ -1,6 +1,8 @@
 # BwnRaids
 The Devils Backbone: Raiding Application
 
+[Demo](https://bwnraids.excit.no)
+
 ## Installation
 
 0. Create a user on GitHub and ask to become a collaborator.
