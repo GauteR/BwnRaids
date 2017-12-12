@@ -85,7 +85,7 @@ class Characters extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUserFk()
+    public function getUser()
     {
         return $this->hasOne(Users::className(), ['user_id' => 'user_fk']);
     }
@@ -125,7 +125,7 @@ class Characters extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getClassFk()
+    public function getClass()
     {
         return $this->hasOne(Classes::className(), ['class_id' => 'class_fk']);
     }
@@ -136,5 +136,22 @@ class Characters extends \yii\db\ActiveRecord
     public function getEvents()
     {
         return $this->hasMany(Events::className(), ['leader_fk' => 'char_id']);
+    }
+    
+    /**
+     * @inheritdoc
+     * @return CharactersQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new CharactersQuery(get_called_class());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
     }
 }

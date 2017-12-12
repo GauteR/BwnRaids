@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\EventsQuery;
 
 /**
  * This is the model class for table "events".
@@ -73,5 +74,22 @@ class Events extends \yii\db\ActiveRecord
     public function getLeaderFk()
     {
         return $this->hasOne(Characters::className(), ['char_id' => 'leader_fk']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return EventsQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new EventsQuery(get_called_class());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
     }
 }
