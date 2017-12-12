@@ -82,4 +82,21 @@ class Attendees extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Statuses::className(), ['status_id' => 'status_fk']);
     }
+
+    /**
+     * @inheritdoc
+     * @return AttendeesQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new AttendeesQuery(get_called_class());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
 }

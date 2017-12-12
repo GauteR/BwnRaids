@@ -15,6 +15,8 @@ use app\models\ProfileForm;
 use app\models\Events;
 use app\models\Classes;
 use app\models\Characters;
+use app\models\Attendees;
+use app\models\Roles;
 
 class SiteController extends Controller
 {
@@ -82,6 +84,24 @@ class SiteController extends Controller
             ]
         ]);
 
+        $events = $eventsProvider->getModels();
+
+        // Counting roles
+        $signups = [];
+        foreach($events as $ev) {
+            $query = Attendees::find()->where(['event_fk' => $ev->event_id]);
+            $provider = new ActiveDataProvider(['query' => $query]);
+            $attendees = $provider->getModels();
+
+            if(!is_null($attendees) && count($attendees) > 0) {
+                $charQuery = Characters::find()->where(['char_id' => $attendees[0]->char_fk]);
+                $charProvider = new ActiveDataProvider(['query' => $charQuery]);
+                $character = $charProvider->getModels();
+
+                $signups[$ev->event_id][] = $character[0]->char_mainrole;
+            }
+        }
+
         if(!Yii::$app->user->isGuest) {
             $charactersQuery = Characters::find()->where(['user_fk' => (int)Yii::$app->user->identity->user_id, 'char_type' => 1]);
 
@@ -91,19 +111,20 @@ class SiteController extends Controller
 
             $characters = $charactersProvider->getModels();
             if(!is_null($characters) && count($characters) > 0) {
-                for($i = 0; $i < 1; $i++) {
-                    $classQuery = Classes::find()->where(['class_id' => (int)$characters[$i]->class_fk ]);
-                }
+                $classQuery = Classes::find()->where(['class_id' => (int)$characters[0]->class_fk ]);
                 
                 $classProvider = new ActiveDataProvider([
                     'query' => $classQuery
                 ]);
-                return $this->render('index', ['events' => $eventsProvider->getModels(), 'characters' => $characters, 'main_class' => $classProvider->getModels() ]);
+
+                $main_class = $classProvider->getModels();
+
+                return $this->render('index', ['events' => $events, 'characters' => $characters, 'main_char' => $characters[0], 'main_class' => $main_class, 'signups' => $signups ]);
             } else {
-                return $this->render('index', ['events' => $eventsProvider->getModels() ]);
+                return $this->render('index', ['events' => $events, 'signups' => $signups ]);
             }
         } else {
-            return $this->render('index', ['events' => $eventsProvider->getModels() ]);
+            return $this->render('index', ['events' => $events, 'signups' => $signups ]);
         }
     }
 
