@@ -1,12 +1,22 @@
 <?php
 
 /* @var $this yii\web\View */
-use  yii\helpers\Html;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 $this->title = 'BwnRaids';
 ?>
 <div class="site-index">
+    <div id="notif" class="alert bg-gray hidden" role="alert"><span id="notif-text">&nbsp;</span></div>
     <?php if(isset($events) && !is_null($events) && count($events) > 0) : ?>
         <?php if(!Yii::$app->user->isGuest) : ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'quick-signup-form',
+            'method' => 'post',
+            'action' => '/site/index'
+        ]); ?>
+        <input type="hidden" name="char_fk" value="<?= $main_char->char_id ?>">
+        <input type="hidden" name="event_fk" value="<?= $events[0]->event_id ?>">
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title"><?= Yii::t('app','Quick Signup') ?></h3>
@@ -26,25 +36,26 @@ $this->title = 'BwnRaids';
                 </div>
                 <div class="form-group">
                     <label><?= Yii::t('app', 'Signup note') ?></label>
-                    <textarea class="form-control" rows="3" <?= (!isset($main_char) ? 'disabled=""' : '') ?>></textarea>
+                    <textarea class="form-control" rows="3" <?= (!isset($main_char) ? 'disabled=""' : '') ?> name="signup_note"><?= $signupModel->signup_note ?></textarea>
                 </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="row">
-                    <div class="col-xs-4">
-                        <a href="#" class="btn btn-danger btn-flat btn-block" <?= (!isset($main_char) ? 'disabled=""' : '') ?>><i class="fa fa-times"></i> <?= Yii::t('app', 'Not Attending') ?></a>
+                    <div class="col-md-4">
+                        <a id="not_attending_btn" href="#" class="btn btn-danger btn-flat btn-block" <?= (!isset($main_char) ? 'disabled=""' : '') ?>><i class="fa fa-times"></i> <?= Yii::t('app', 'Not Attending') ?></a>
                     </div>
-                    <div class="col-xs-4">
-                        <a href="#" class="btn btn-default btn-flat btn-block" <?= (!isset($main_char) ? 'disabled=""' : '') ?>><i class="fa fa-minus"></i> <?= Yii::t('app', 'Maybe') ?></a>
+                    <div class="col-md-4">
+                        <a id="maybe_btn" href="#" class="btn btn-default btn-flat btn-block" <?= (!isset($main_char) ? 'disabled=""' : '') ?>><i class="fa fa-minus"></i> <?= Yii::t('app', 'Maybe') ?></a>
                     </div>
-                    <div class="col-xs-4">
-                        <a href="#" class="btn btn-success btn-flat btn-block" <?= (!isset($main_char) ? 'disabled=""' : '') ?>><i class="fa fa-check"></i> <?= Yii::t('app', 'Sign up') ?></a>
+                    <div class="col-md-4">
+                        <a id="signup_btn" href="#" class="btn btn-success btn-flat btn-block" <?= (!isset($main_char) ? 'disabled=""' : '') ?>><i class="fa fa-check"></i> <?= Yii::t('app', 'Sign up') ?></a>
                     </div>
                 </div>
             </div>
             <!-- box-footer -->
         </div>
+        <?php ActiveForm::end(); ?>
         <?php endif; ?>
         <div class="box box-success">
             <div class="box-header with-border">
@@ -106,7 +117,7 @@ $this->title = 'BwnRaids';
                                     <div class="col-lg-3">
                                         <div class="info-box bg-yellow" style="min-height: inherit;">
                                             <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-shield"></i></span>
-                                            <div class="info-box-content">
+                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
                                                 <span class="info-box-text" style="display: inline !important;">Tanks</span>
                                                 <span class="info-box-number" style="display: inline !important;"><?= $tank_number ?></span>
                                             </div>
@@ -115,7 +126,7 @@ $this->title = 'BwnRaids';
                                     <div class="col-lg-3">
                                         <div class="info-box bg-green" style="min-height: inherit;">
                                             <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-medkit"></i></span>
-                                            <div class="info-box-content">
+                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
                                                 <span class="info-box-text" style="display: inline !important;">Healers</span>
                                                 <span class="info-box-number" style="display: inline !important;"><?= $healer_number ?></span>
                                             </div>
@@ -124,7 +135,7 @@ $this->title = 'BwnRaids';
                                     <div class="col-lg-3">
                                         <div class="info-box bg-red" style="min-height: inherit;">
                                             <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-fire"></i></span>
-                                            <div class="info-box-content">
+                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
                                                 <span class="info-box-text" style="display: inline !important;">Melee</span>
                                                 <span class="info-box-number" style="display: inline !important;"><?= $melee_number ?></span>
                                             </div>
@@ -133,7 +144,7 @@ $this->title = 'BwnRaids';
                                     <div class="col-lg-3">
                                         <div class="info-box bg-red" style="min-height: inherit;">
                                             <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-bullseye"></i></span>
-                                            <div class="info-box-content">
+                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
                                                 <span class="info-box-text" style="display: inline !important;">Ranged</span>
                                                 <span class="info-box-number" style="display: inline !important;"><?= $ranged_number ?></span>
                                             </div>
@@ -147,6 +158,7 @@ $this->title = 'BwnRaids';
                                     <a href="/site/login" class="btn btn-primary"><?= Yii::t('app', 'Sign in to sign up for ').$ev->event_name ?></a>
                                 <?php else : ?>
                                     <?php if(Yii::$app->user->identity->user_fk_rank <= 2 ) : ?>
+                                        <h4><?= Yii::t('app', 'Admin only') ?></h4>
                                         <a href="/events/manage?event_id=<?= $ev->event_id ?>" class="btn btn-link"><?= Yii::t('app', 'Manage ').$ev->event_name ?></a>
                                     <?php endif; ?>
                                 <?php endif; ?>

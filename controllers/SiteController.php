@@ -10,8 +10,7 @@ use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
 use app\models\LoginForm;
-use app\models\RegisterForm;
-use app\models\ProfileForm;
+use app\models\SignupForm;
 use app\models\Events;
 use app\models\Classes;
 use app\models\Characters;
@@ -118,8 +117,17 @@ class SiteController extends Controller
                 ]);
 
                 $main_class = $classProvider->getModels();
+                
+                $signupModel = new SignupForm();
+        
+                if ($signupModel->load(Yii::$app->request->post())) {
+                    if ($signupModel->validate()) {
+                        // form inputs are valid, do something here
+                        return;
+                    }
+                }
 
-                return $this->render('index', ['events' => $events, 'characters' => $characters, 'main_char' => $characters[0], 'main_class' => $main_class, 'signups' => $signups ]);
+                return $this->render('index', ['events' => $events, 'characters' => $characters, 'main_char' => $characters[0], 'main_class' => $main_class, 'signups' => $signups, 'signupModel' => $signupModel ]);
             } else {
                 return $this->render('index', ['events' => $events, 'signups' => $signups ]);
             }
