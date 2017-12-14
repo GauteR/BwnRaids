@@ -15,7 +15,7 @@ $this->title = 'BwnRaids';
             'method' => 'post',
             'action' => '/site/index'
         ]); ?>
-        <input type="hidden" name="char_fk" value="<?= $main_char->char_id ?>">
+        <input type="hidden" name="char_fk" value="<?= (isset($main_char) ? $main_char->char_id : 0) ?>">
         <input type="hidden" name="event_fk" value="<?= $events[0]->event_id ?>">
         <div class="box box-primary">
             <div class="box-header with-border">
@@ -36,7 +36,7 @@ $this->title = 'BwnRaids';
                 </div>
                 <div class="form-group">
                     <label><?= Yii::t('app', 'Signup note') ?></label>
-                    <textarea class="form-control" rows="3" <?= (!isset($main_char) ? 'disabled=""' : '') ?> name="signup_note"><?= $signupModel->signup_note ?></textarea>
+                    <textarea class="form-control" rows="3" <?= (!isset($main_char) ? 'disabled=""' : '') ?> name="signup_note"><?= (isset($signupModel) ? $signupModel->signup_note : "") ?></textarea>
                 </div>
             </div>
             <!-- /.box-body -->

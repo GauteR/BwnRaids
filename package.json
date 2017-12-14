@@ -1,0 +1,33 @@
+{
+  "name": "bwnraids",
+  "version": "1.0.0",
+  "description": "The Devils Backbone: Raiding Application",
+  "main": "bwnraids/index.php",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GauteR/BwnRaids.git"
+  },
+  "keywords": [
+    "event",
+    "registration"
+  ],
+  "author": "Gaute Rønningen <gaute@excit.no>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GauteR/BwnRaids/issues"
+  },
+  "homepage": "https://github.com/GauteR/BwnRaids#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-less": "^0.1.7",
+    "less": "^2.7.3",
+    "typescript": "^2.6.2"
+  }
+}
