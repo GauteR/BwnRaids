@@ -49,13 +49,6 @@ $config = [
             'rules' => [
             ],
         ],
-        'assetManager' => [
-            'bundles' => [
-                'dmstr\web\AdminLteAsset' => [
-                    'skin' => 'skin-blue',
-                ],
-            ],
-        ],
     ],
     'params' => $params,
 ];

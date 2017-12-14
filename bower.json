@@ -1,0 +1,23 @@
+{
+  "name": "bwnraids",
+  "description": "The Devils Backbone: Raiding Application",
+  "main": "bwnraids/index.php",
+  "authors": [
+    "Gaute Rønningen <gaute@excit.no>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "event",
+    "registration"
+  ],
+  "homepage": "https://github.com/GauteR/BwnRaids",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower-asset",
+    "test",
+    "tests"
+  ]
+}

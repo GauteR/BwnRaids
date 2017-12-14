@@ -1,33 +1,43 @@
 {
-  "name": "bwnraids",
-  "version": "1.0.0",
-  "description": "The Devils Backbone: Raiding Application",
-  "main": "bwnraids/index.php",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GauteR/BwnRaids.git"
-  },
-  "keywords": [
-    "event",
-    "registration"
-  ],
-  "author": "Gaute Rønningen <gaute@excit.no>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/GauteR/BwnRaids/issues"
-  },
-  "homepage": "https://github.com/GauteR/BwnRaids#readme",
-  "devDependencies": {
-    "grunt": "^1.0.1",
-    "grunt-less": "^0.1.7",
-    "less": "^2.7.3",
-    "typescript": "^2.6.2"
-  }
+    "name": "bwnraids",
+    "version": "1.0.0",
+    "description": "The Devils Backbone: Raiding Application",
+    "main": "bwnraids/index.php",
+    "private": true,
+    "directories": {
+        "doc": "docs",
+        "test": "tests"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GauteR/BwnRaids.git"
+    },
+    "keywords": [
+        "event",
+        "registration"
+    ],
+    "author": "Gaute Rønningen <gaute@excit.no>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/GauteR/BwnRaids/issues"
+    },
+    "homepage": "https://github.com/GauteR/BwnRaids#readme",
+    "devDependencies": {
+        "bower": "^1.8.2",
+        "grunt": "^1.0.1",
+        "grunt-contrib-clean": "^1.1.0",
+        "grunt-contrib-concat": "^1.0.1",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-contrib-less": "^1.4.1",
+        "grunt-contrib-watch": "^1.0.0",
+        "grunt-image": "^4.1.0",
+        "grunt-includes": "^1.0.0",
+        "grunt-text-replace": "^0.4.0",
+        "less": "^2.7.3",
+        "typescript": "^2.6.2"
+    },
+    "dependencies": {}
 }

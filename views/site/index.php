@@ -26,14 +26,14 @@ $this->title = 'BwnRaids';
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <div class="form-group">
-                    <label><?= Yii::t('app', 'Character') ?></label>
-                    <input type="text" class="form-control" placeholder="<?= (isset($main_char) ? $main_char->char_name.'-'.$main_char->char_realm : Yii::t('app','Please choose a main character.')) ?>" disabled="">
-                </div>
-                <div class="form-group">
-                    <label><?= Yii::t('app', 'Event') ?></label>
-                    <input type="text" class="form-control" placeholder="<?= $events[0]->event_name.' @ '.date(Yii::t('app', 'l d.m.Y - H:i'), strtotime($events[0]->event_date)) ?>" disabled="">
-                </div>
+                <p class="pull-left">
+                    Character: <?= (isset($main_char) ? $main_char->char_name.'-'.$main_char->char_realm : Yii::t('app','Please choose a main character.')) ?><br/>
+                </p>
+                <p class="pull-right">
+                    Event: <?= $events[0]->event_name.' @ '.date(Yii::t('app', 'l d.m.Y - H:i'), strtotime($events[0]->event_date)) ?><br/>
+                </p>
+                <br/>
+                <br/>
                 <div class="form-group">
                     <label><?= Yii::t('app', 'Signup note') ?></label>
                     <textarea class="form-control" rows="3" <?= (!isset($main_char) ? 'disabled=""' : '') ?> name="signup_note"><?= (isset($signupModel) ? $signupModel->signup_note : "") ?></textarea>
@@ -111,42 +111,42 @@ $this->title = 'BwnRaids';
                             <h3 class="timeline-header"><a href="#"><?= $ev->event_name ?></a></h3>
 
                             <div class="timeline-body">
-                                <div class="row"><?= $ev->event_note ?></div>
+                                <div class="row"><div class="col-xs-12"><p><?= $ev->event_note ?></p></div></div>
                                 <br/>
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <div class="info-box bg-yellow" style="min-height: inherit;">
-                                            <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-shield"></i></span>
-                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
-                                                <span class="info-box-text" style="display: inline !important;">Tanks</span>
-                                                <span class="info-box-number" style="display: inline !important;"><?= $tank_number ?></span>
+                                        <div class="info-box bg-yellow">
+                                            <span class="info-box-icon"><i class="fa fa-shield"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Tanks</span>
+                                                <span class="info-box-number"><?= $tank_number ?></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="info-box bg-green" style="min-height: inherit;">
-                                            <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-medkit"></i></span>
-                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
-                                                <span class="info-box-text" style="display: inline !important;">Healers</span>
-                                                <span class="info-box-number" style="display: inline !important;"><?= $healer_number ?></span>
+                                        <div class="info-box bg-green">
+                                            <span class="info-box-icon"><i class="fa fa-medkit"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Healers</span>
+                                                <span class="info-box-number"><?= $healer_number ?></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="info-box bg-red" style="min-height: inherit;">
-                                            <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-fire"></i></span>
-                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
-                                                <span class="info-box-text" style="display: inline !important;">Melee</span>
-                                                <span class="info-box-number" style="display: inline !important;"><?= $melee_number ?></span>
+                                        <div class="info-box bg-red">
+                                            <span class="info-box-icon"><i class="fa fa-gavel"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Melee</span>
+                                                <span class="info-box-number"><?= $melee_number ?></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="info-box bg-red" style="min-height: inherit;">
-                                            <span class="info-box-icon" style="height: inherit !important;line-height: inherit !important;font-size: 25px !important;width: 45px !important;"><i class="fa fa-bullseye"></i></span>
-                                            <div class="info-box-content" style="padding: 5px 10px;margin-left: 45px;color: #1a1a1a;background-color: #f9f9f9;border-bottom: thin solid #ddd;">
-                                                <span class="info-box-text" style="display: inline !important;">Ranged</span>
-                                                <span class="info-box-number" style="display: inline !important;"><?= $ranged_number ?></span>
+                                        <div class="info-box bg-red">
+                                            <span class="info-box-icon"><i class="fa fa-bullseye"></i></span>
+                                            <div class="info-box-content">
+                                                <span class="info-box-text">Ranged</span>
+                                                <span class="info-box-number"><?= $ranged_number ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +155,7 @@ $this->title = 'BwnRaids';
 
                             <div class="timeline-footer">
                                 <?php if(Yii::$app->user->isGuest) : ?>
-                                    <a href="/site/login" class="btn btn-primary"><?= Yii::t('app', 'Sign in to sign up for ').$ev->event_name ?></a>
+                                    <a href="/site/login" class="btn btn-link"><?= Yii::t('app', 'Sign in to sign up for ').$ev->event_name ?></a>
                                 <?php else : ?>
                                     <?php if(Yii::$app->user->identity->user_fk_rank <= 2 ) : ?>
                                         <h4><?= Yii::t('app', 'Admin only') ?></h4>

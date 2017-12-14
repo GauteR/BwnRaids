@@ -1,5 +1,9 @@
+// Site.js
+
 $.noConflict();
 jQuery(document).ready(function($) {
+    'use strict';
+
     function submitForm(values, callback) {
         return $.post({
             url: '/ajax/submit',
