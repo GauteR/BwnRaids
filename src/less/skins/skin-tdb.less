@@ -14,7 +14,7 @@
  @tdb-navbar-bgcolor: lighten(@tdb-theme-bgcolor, 5%);
  @tdb-navbar-color: @tdb-theme-color;
  @tdb-navbar-border: darken(@tdb-navbar-bgcolor, 2%);
- 
+
  /* skin-tdb navbar */
  .skin-tdb {
     //Navbar & Logo
@@ -118,6 +118,7 @@
             }
         }
         li div.timeline-item {
+            cursor: pointer;
             padding: 10px;
             background-color: lighten(@tdb-theme-bgcolor, 20%);
             color: @tdb-theme-color;
@@ -125,6 +126,9 @@
 
             .time {
                 color: @tdb-theme-color;
+            }
+            .timeline-header {
+                font-weight: bold;
             }
             .timeline-header, .timeline-body, .timeline-footer {
                 border-color: @tdb-theme-border;
@@ -135,6 +139,14 @@
                 }
             }
         }
+        li div.timeline-item.ongoing {
+            h3::after {
+                content: ' ONGOING';
+                color: #ccc;
+                font-style: italic;
+                font-size: 0.8em;
+            }
+        } 
     }
 
     .info-box {
@@ -160,4 +172,3 @@
         }
     }
  }
- 

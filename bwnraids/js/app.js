@@ -866,6 +866,7 @@ jQuery(document).ready(function($) {
         });
     }
 
+    // Index
     $('div.site-index a#not_attending_btn').click(function(e) {
         e.preventDefault();
         var form = $('form#quick-signup-form'),
@@ -938,6 +939,34 @@ jQuery(document).ready(function($) {
             }
         });
     });
+    $('div.site-index div.timeline-item').click(function(e) {
+        e.preventDefault();
+        var ev_id = $(this).attr('aria-eventid'),
+            ch_id = $(this).attr('aria-charid'),
+            rank = $(this).attr('aria-rankid'),
+            isOngoing = $(this).attr('isOngoing');
+
+        if (rank >= 6) {
+            window.location.replace("/site/login");
+        } else {
+            if (rank > 2 && !isOngoing) {
+                var d = $.dialog('#ongoing-dialog').dialog({
+                    buttons: [{
+                        text: 'OK',
+                        click: function() {
+                            $(this).dialog("close");
+                        },
+                        autoOpen: false
+                    }]
+                });
+                d.show();
+            } else {
+                window.location.replace("/events/index?event_id=" + ev_id + "&char_id=" + ch_id);
+            }
+        }
+    });
+
+    // Events
 });
 
 /* TodoList()

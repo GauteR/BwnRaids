@@ -17,7 +17,7 @@ dmstr\web\AdminLteAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="register-page">
+<body class="skin-tdb register-page">
 
 <?php $this->beginBody() ?>
 

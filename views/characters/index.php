@@ -10,19 +10,9 @@ use yii\grid\GridView;
 $this->title = Yii::t('app', 'Characters');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="characters-index">
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Characters'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+<h1>characters/index</h1>
 
-            'char_name',
-            'char_realm',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-</div>
+<p>
+    You may change the content of this page by modifying
+    the file <code><?= __FILE__; ?></code>.
+</p>

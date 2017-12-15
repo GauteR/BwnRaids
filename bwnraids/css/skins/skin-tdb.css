@@ -192,6 +192,7 @@
   border-color: #153a46;
 }
 .skin-tdb ul.timeline li div.timeline-item {
+  cursor: pointer;
   padding: 10px;
   background-color: #276c80;
   color: #f9f9f9;
@@ -199,6 +200,9 @@
 }
 .skin-tdb ul.timeline li div.timeline-item .time {
   color: #f9f9f9;
+}
+.skin-tdb ul.timeline li div.timeline-item .timeline-header {
+  font-weight: bold;
 }
 .skin-tdb ul.timeline li div.timeline-item .timeline-header,
 .skin-tdb ul.timeline li div.timeline-item .timeline-body,
@@ -213,6 +217,12 @@
 .skin-tdb ul.timeline li div.timeline-item .timeline-body > a:hover,
 .skin-tdb ul.timeline li div.timeline-item .timeline-footer > a:hover {
   color: #b4dde9;
+}
+.skin-tdb ul.timeline li div.timeline-item.ongoing h3::after {
+  content: ' ONGOING';
+  color: #ccc;
+  font-style: italic;
+  font-size: 0.8em;
 }
 .skin-tdb .info-box {
   min-height: inherit;

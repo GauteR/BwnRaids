@@ -18,6 +18,11 @@ use yii\bootstrap\Nav;
                         'url' => ['/site/index']
                     ],
                     [
+                        'label' => '<i class="fa fa-calendar"></i><span>Events</span>',
+                        'url' => ['/events/index'],
+                        'visible' =>!Yii::$app->user->isGuest
+                    ],
+                    [
                         'label' => '<i class="fa fa-user"></i><span>My Characters</span>',
                         'url' => ['/characters/index'],
                         'visible' =>!Yii::$app->user->isGuest
@@ -31,6 +36,11 @@ use yii\bootstrap\Nav;
                         'label' => '<i class="fa fa-bolt"></i><span>Register</span>',
                         'url' => ['/site/register'],
                         'visible' =>Yii::$app->user->isGuest
+                    ],
+                    [
+                        'label' => '<i class="fa fa-cog"></i><span>Administration</span>',
+                        'url' => ['/admin/index'],
+                        'visible' => (isset(Yii::$app->user->identity->user_fk_rank) ? (Yii::$app->user->identity->user_fk_rank <= 2) : false)
                     ],
                 ],
             ]

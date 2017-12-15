@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             js: {
                 // Compile js files upon saving
                 files: ['src/js/*.js'],
-                tasks: ['js']
+                tasks: ['concat']
             },
             skins: {
                 // Compile any skin less files upon saving

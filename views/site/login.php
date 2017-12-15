@@ -25,7 +25,7 @@ $fieldOptions2 = [
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Log in to BwnRaids</p>
 
         <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
@@ -54,7 +54,7 @@ $fieldOptions2 = [
         <?php ActiveForm::end(); ?>
 
         <a href="/site/forgot">I forgot my password</a><br>
-        <a href="/site/register" class="text-center">Register a new membership</a>
+        <a href="/site/register" class="text-center">Register on BwnRaids</a>
 
     </div>
     <!-- /.login-box-body -->

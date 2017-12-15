@@ -68,7 +68,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $eventsQuery = Events::find();//->where(['>', 'event_date', new Expression('NOW()')]);
+        $eventsQuery = Events::find()->where(['>', 'event_date', new Expression('DATE_SUB(NOW(), INTERVAL 4 HOUR)')]);
 
         $eventsProvider = new ActiveDataProvider([
             'query' => $eventsQuery,
