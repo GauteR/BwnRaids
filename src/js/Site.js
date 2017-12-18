@@ -35,6 +35,9 @@ jQuery(document).ready(function($) {
             if (response.success) {
                 notif_text.html("<p>Successfully added you as <strong>not available</strong> for the event.</p>");
                 notif.removeClass('hidden');
+                setTimeout(function() {
+                    notif.addClass('hidden');
+                }, 6000);
             }
         });
     });
@@ -59,6 +62,9 @@ jQuery(document).ready(function($) {
             if (response.success) {
                 notif_text.html("<p>Successfully added you as a <strong>maybe</strong> to the event.</p>");
                 notif.removeClass('hidden');
+                setTimeout(function() {
+                    notif.addClass('hidden');
+                }, 6000);
             }
         });
     });
@@ -83,10 +89,13 @@ jQuery(document).ready(function($) {
             if (response.success) {
                 notif_text.html("<p>Successfully <strong>signed you up</strong> to the event.</p>");
                 notif.removeClass('hidden');
+                setTimeout(function() {
+                    notif.addClass('hidden');
+                }, 6000);
             }
         });
     });
-    $('div.site-index div.timeline-item').click(function(e) {
+    $('div.site-index div.upcoming div.timeline-item').click(function(e) {
         e.preventDefault();
         var ev_id = $(this).attr('aria-eventid'),
             ch_id = $(this).attr('aria-charid'),
@@ -111,6 +120,12 @@ jQuery(document).ready(function($) {
                 window.location.replace("/events/index?event_id=" + ev_id + "&char_id=" + ch_id);
             }
         }
+    });
+    $('div.site-index div.recent div.timeline-item').click(function(e) {
+        e.preventDefault();
+        var rep_id = $(this).attr('aria-reportid');
+
+        window.open("https://www.warcraftlogs.com/reports/" + rep_id, '_blank');
     });
 
     // Events

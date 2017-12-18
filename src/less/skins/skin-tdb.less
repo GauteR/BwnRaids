@@ -8,6 +8,7 @@
  @import "../mixins.less";
 
  @tdb-theme-bgcolor: #0f2a32;
+ @tdb-logo-color: rgb(255,165,0);
  @tdb-theme-color: #f9f9f9;
  @tdb-theme-linkcolor: #b4dde9;
  @tdb-theme-border: lighten(@tdb-theme-bgcolor, 5%);
@@ -24,7 +25,7 @@
             color: @tdb-theme-color;
         }
         .navbar-brand {
-            color: @tdb-theme-color;
+            color: @tdb-logo-color;
             border-right: 1px solid @tdb-navbar-border;
         }
         .navbar {
@@ -49,10 +50,10 @@
             }
         }
         > .logo {
-            .logo-variant(@tdb-navbar-bgcolor; @tdb-navbar-color);
+            .logo-variant(@tdb-navbar-bgcolor; @tdb-logo-color);
             border-right: 1px solid @tdb-navbar-border;
             @media (max-width: @screen-header-collapse) {
-                .logo-variant(@tdb-navbar-bgcolor; @tdb-navbar-color);
+                .logo-variant(@tdb-navbar-bgcolor; @tdb-logo-color);
                 border-right: none;
             }
         }
@@ -62,9 +63,9 @@
         }
     }
     .main-footer {
-        background-color: @tdb-navbar-bgcolor;
+        background-color: @tdb-theme-bgcolor;
         color: @tdb-navbar-color;
-        border-color: @tdb-navbar-border;
+        border-color: @tdb-theme-bgcolor;
     }
  
     //Content Header
@@ -109,6 +110,11 @@
         border-color: @tdb-theme-border;
    }
 
+   div.upcoming li div.timeline-item,
+   div.recent li div.timeline-item {
+    cursor: pointer;
+   }
+
     ul.timeline {
         li.time-label {
             > span.bg-white {
@@ -117,8 +123,8 @@
                 border-color: @tdb-theme-border;
             }
         }
+
         li div.timeline-item {
-            cursor: pointer;
             padding: 10px;
             background-color: lighten(@tdb-theme-bgcolor, 20%);
             color: @tdb-theme-color;

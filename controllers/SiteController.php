@@ -16,6 +16,7 @@ use app\models\Classes;
 use app\models\Characters;
 use app\models\Attendees;
 use app\models\Roles;
+use app\models\WarcraftLogs;
 
 class SiteController extends Controller
 {
@@ -73,7 +74,7 @@ class SiteController extends Controller
         $eventsProvider = new ActiveDataProvider([
             'query' => $eventsQuery,
             'pagination' => [
-                'pagesize' => 3
+                'pagesize' => 4
             ],
             'sort' => [
                 'defaultOrder' => [
@@ -117,6 +118,8 @@ class SiteController extends Controller
                 ]);
 
                 $main_class = $classProvider->getModels();
+
+                $logs = new WarcraftLogs();
                 
                 $signupModel = new SignupForm();
         
@@ -127,7 +130,7 @@ class SiteController extends Controller
                     }
                 }
 
-                return $this->render('index', ['events' => $events, 'characters' => $characters, 'main_char' => $characters[0], 'main_class' => $main_class, 'signups' => $signups, 'signupModel' => $signupModel ]);
+                return $this->render('index', ['events' => $events, 'characters' => $characters, 'main_char' => $characters[0], 'main_class' => $main_class, 'signups' => $signups, 'signupModel' => $signupModel, 'reports' => $logs->fetchGuildReports() ]);
             } else {
                 return $this->render('index', ['events' => $events, 'signups' => $signups ]);
             }

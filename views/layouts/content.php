@@ -28,5 +28,5 @@ use dmstr\widgets\Alert;
 </div>
 
 <footer class="main-footer">
-    <strong>Copyright &copy; <?= date('Y') ?><a href="http://thedevilsbackbone.co.uk">The Devils Backbone</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?= date('Y') ?> <a href="http://thedevilsbackbone.co.uk">The Devils Backbone</a>.</strong> All rights reserved.
 </footer>

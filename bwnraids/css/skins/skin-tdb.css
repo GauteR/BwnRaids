@@ -11,7 +11,7 @@
   color: #f9f9f9;
 }
 .skin-tdb .main-header .navbar-brand {
-  color: #f9f9f9;
+  color: #ffa500;
   border-right: 1px solid #13343e;
 }
 .skin-tdb .main-header .navbar {
@@ -51,7 +51,7 @@
 }
 .skin-tdb .main-header > .logo {
   background-color: #153a46;
-  color: #f9f9f9;
+  color: #ffa500;
   border-bottom: 0 solid transparent;
   border-right: 1px solid #13343e;
 }
@@ -61,7 +61,7 @@
 @media (max-width: 767px) {
   .skin-tdb .main-header > .logo {
     background-color: #153a46;
-    color: #f9f9f9;
+    color: #ffa500;
     border-bottom: 0 solid transparent;
     border-right: none;
   }
@@ -73,9 +73,9 @@
   background-color: #153a46;
 }
 .skin-tdb .main-footer {
-  background-color: #153a46;
+  background-color: #0f2a32;
   color: #f9f9f9;
-  border-color: #13343e;
+  border-color: #0f2a32;
 }
 .skin-tdb .content-header {
   background: transparent;
@@ -186,13 +186,16 @@
   color: #f9f9f9;
   border-color: #153a46;
 }
+.skin-tdb div.upcoming li div.timeline-item,
+.skin-tdb div.recent li div.timeline-item {
+  cursor: pointer;
+}
 .skin-tdb ul.timeline li.time-label > span.bg-white {
   background-color: #11313a;
   color: #f9f9f9;
   border-color: #153a46;
 }
 .skin-tdb ul.timeline li div.timeline-item {
-  cursor: pointer;
   padding: 10px;
   background-color: #276c80;
   color: #f9f9f9;

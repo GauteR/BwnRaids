@@ -41,7 +41,7 @@ use yii\bootstrap\Nav;
                         'label' => '<i class="fa fa-cog"></i><span>Administration</span>',
                         'url' => ['/admin/index'],
                         'visible' => (isset(Yii::$app->user->identity->user_fk_rank) ? (Yii::$app->user->identity->user_fk_rank <= 2) : false)
-                    ],
+                    ]
                 ],
             ]
         );
