@@ -249,3 +249,6 @@
 .skin-tdb .info-box .info-box-number {
   display: inline !important;
 }
+.skin-tdb div.box.single-event > * {
+  background-color: #276c80;
+}

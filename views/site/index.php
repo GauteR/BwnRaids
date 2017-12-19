@@ -134,7 +134,7 @@ $this->title = 'BwnRaids';
                                     <div class="row"><div class="col-xs-12"><p><?= $ev->event_note ?></p></div></div>
                                     <br/>
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-4">
                                             <div class="info-box bg-yellow">
                                                 <span class="info-box-icon"><i class="fa fa-shield"></i></span>
                                                 <div class="info-box-content">
@@ -143,7 +143,7 @@ $this->title = 'BwnRaids';
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-4">
                                             <div class="info-box bg-green">
                                                 <span class="info-box-icon"><i class="fa fa-medkit"></i></span>
                                                 <div class="info-box-content">
@@ -152,7 +152,7 @@ $this->title = 'BwnRaids';
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-4">
                                             <div class="info-box bg-red">
                                                 <span class="info-box-icon"><i class="fa fa-gavel"></i></span>
                                                 <div class="info-box-content">
@@ -160,8 +160,6 @@ $this->title = 'BwnRaids';
                                                     <span class="info-box-number"><?= $melee_number ?></span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3">
                                             <div class="info-box bg-red">
                                                 <span class="info-box-icon"><i class="fa fa-bullseye"></i></span>
                                                 <div class="info-box-content">
