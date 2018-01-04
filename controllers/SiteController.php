@@ -121,16 +121,7 @@ class SiteController extends Controller
 
                 $logs = new WarcraftLogs();
                 
-                $signupModel = new SignupForm();
-        
-                if ($signupModel->load(Yii::$app->request->post())) {
-                    if ($signupModel->validate()) {
-                        // form inputs are valid, do something here
-                        return;
-                    }
-                }
-
-                return $this->render('index', ['events' => $events, 'characters' => $characters, 'main_char' => $characters[0], 'main_class' => $main_class, 'signups' => $signups, 'signupModel' => $signupModel, 'reports' => $logs->fetchGuildReports() ]);
+                return $this->render('index', ['events' => $events, 'characters' => $characters, 'main_char' => $characters[0], 'main_class' => $main_class, 'signups' => $signups, 'reports' => $logs->fetchGuildReports() ]);
             } else {
                 return $this->render('index', ['events' => $events, 'signups' => $signups ]);
             }

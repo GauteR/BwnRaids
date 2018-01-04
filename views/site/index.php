@@ -17,12 +17,12 @@ $this->title = 'BwnRaids';
         $num = 0;
         if((time() >= strtotime($events[0]->event_date) && time() <= strtotime('+4 hours'))) $num = 1;
         ?>
-        <input type="hidden" name="char_fk" value="<?= (isset($main_char) ? $main_char->char_id : 0) ?>"/>
-        <input type="hidden" name="event_fk" value="<?= $events[$num]->event_id ?>"/>
+        <input type="hidden" id="char_fk" name="char_fk" value="<?= (isset($main_char) ? $main_char->char_id : 0) ?>"/>
+        <input type="hidden" id="event_fk" name="event_fk" value="<?= $events[$num]->event_id ?>"/>
         <div class="col-lg-12">
-            <div class="box box-warning">
+            <div id="quick-signup-box" class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= Yii::t('app','Quick Signup') ?></h3>
+                    <h3 id="box-title" class="box-title"><?= Yii::t('app','Quick Signup') ?></h3>
                     <div class="box-tools pull-right">
                     </div>
                     <!-- /.box-tools -->
@@ -40,7 +40,7 @@ $this->title = 'BwnRaids';
                     <div class="row" style="padding:5px 16px;">
                         <div class="form-group">
                             <label><?= Yii::t('app', 'Signup note') ?></label>
-                            <textarea class="form-control" rows="3" <?= (!isset($main_char) ? 'disabled=""' : '') ?> name="signup_note"><?= (isset($signupModel) ? $signupModel->signup_note : "") ?></textarea>
+                            <textarea id="signup_note" class="form-control" rows="3" <?= (!isset($main_char) ? 'disabled=""' : '') ?> name="signup_note"></textarea>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,11 @@ $this->title = 'BwnRaids';
         </div>
         <?php ActiveForm::end(); ?>
         <?php endif; ?>
+        <?php if(!Yii::$app->user->isGuest) : ?>
         <div class="col-lg-8">
+        <?php else : ?>
+        <div class="col-lg-12">
+        <?php endif; ?>
             <div class="box box-primary upcoming">
                 <div class="box-header with-border">
                     <h3 class="box-title"><?= Yii::t('app','Upcoming Events') ?></h3>

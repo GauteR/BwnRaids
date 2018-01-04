@@ -14,6 +14,25 @@ jQuery(document).ready(function($) {
     }
 
     // Index
+    $('div.site-index form#quick-signup-form').ready(function() {
+        var form = $('form#quick-signup-form'),
+            values = form.serializeArray();
+
+        $.post({
+            url: '/ajax/getsignupdata',
+            data: values,
+            success: function(response) {
+                if (response.success) {
+                    var d = new Date(response.data.signup_created);
+
+                    $('#signup_note').val(response.data.signup_note);
+                    $('#box-title').html("Edit status");
+                }
+            },
+            dataType: "json"
+        });
+    });
+
     $('div.site-index a#not_attending_btn').click(function(e) {
         e.preventDefault();
         var form = $('form#quick-signup-form'),
