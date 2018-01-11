@@ -28,22 +28,56 @@ class EventsController extends Controller
 
             $events = $eventsProvider->getModels();
             
-            $signups = [];
+            $signups = []; $maybes = []; $notavailables = [];
             $query = Attendees::find()->where(['event_fk' => $events[0]->event_id]);
             $provider = new ActiveDataProvider(['query' => $query]);
             $attendees = $provider->getModels();
 
+            $status_1_query = Attendees::find()->where(['event_fk' => $events[0]->event_id, 'status_fk' => 1]);
+            $status_2_query = Attendees::find()->where(['event_fk' => $events[0]->event_id, 'status_fk' => 2]);
+            $status_3_query = Attendees::find()->where(['event_fk' => $events[0]->event_id, 'status_fk' => 3]);
+
+            $status_1_provider = new ActiveDataProvider(['query' => $status_1_query]);
+            $status_2_provider = new ActiveDataProvider(['query' => $status_2_query]);
+            $status_3_provider = new ActiveDataProvider(['query' => $status_3_query]);
+
             if(!is_null($attendees) && count($attendees) > 0) {
+                $status_1 = $status_1_provider->getModels();
+                $status_2 = $status_2_provider->getModels();
+                $status_3 = $status_3_provider->getModels();
+
                 foreach($attendees as $att) {
                     $charQuery = Characters::find()->where(['char_id' => $att->char_fk]);
                     $charProvider = new ActiveDataProvider(['query' => $charQuery]);
                     $character = $charProvider->getModels();
 
-                    $signups[] = array('char' => $character[0], 'status' => $att->status_fk);
+                    $arr[] = array('char' => $character[0]);
+                }
+
+                foreach($status_1 as $att) {
+                    $charQuery = Characters::find()->where(['char_id' => $att->char_fk]);
+                    $charProvider = new ActiveDataProvider(['query' => $charQuery]);
+                    $character = $charProvider->getModels();
+
+                    $signups[] = array('char' => $character[0]);
+                }
+                foreach($status_2 as $att) {
+                    $charQuery = Characters::find()->where(['char_id' => $att->char_fk]);
+                    $charProvider = new ActiveDataProvider(['query' => $charQuery]);
+                    $character = $charProvider->getModels();
+
+                    $maybes[] = array('char' => $character[0]);
+                }
+                foreach($status_3 as $att) {
+                    $charQuery = Characters::find()->where(['char_id' => $att->char_fk]);
+                    $charProvider = new ActiveDataProvider(['query' => $charQuery]);
+                    $character = $charProvider->getModels();
+
+                    $notavailables[] = array('char' => $character[0]);
                 }
             }
             
-            return $this->render('single', array('event' => $events[0], 'signups' => $signups));
+            return $this->render('single', array('event' => $events[0], 'attendees'=> $arr, 'signups' => $signups, 'maybes' => $maybes, 'notavailables' => $notavailables));
         } else {
             $eventsQuery = Events::find()->where(['>', 'event_date', new Expression('DATE_SUB(NOW(), INTERVAL 4 HOUR)')]);
 

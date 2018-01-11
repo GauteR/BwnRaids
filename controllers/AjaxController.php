@@ -28,31 +28,33 @@ class AjaxController extends \yii\web\Controller
     {
         $req = $_REQUEST; $resp = array('success' => false);
 
-        try {
-            $query = Attendees::find()->where(['event_fk' => (int)$req['event_fk'], 'char_fk' => (int)$req['char_fk']]);
-            $provider = new ActiveDataProvider(['query' => $query]);
-            $signups = $provider->getModels();
+        if(isset($req['event_fk']) && isset($req['char_fk'])) {
+            try {
+                $query = Attendees::find()->where(['event_fk' => (int)$req['event_fk'], 'char_fk' => (int)$req['char_fk']]);
+                $provider = new ActiveDataProvider(['query' => $query]);
+                $signups = $provider->getModels();
 
-            if(!is_null($signups)) {
-                $signup = $signups[0];
+                if(!is_null($signups)) {
+                    $signup = $signups[0];
 
-                $resp = array(
-                    'success' => true,
-                    'data' => [
-                        'attendee_id' => (int)$signup->attendee_id,
-                        'event_fk' => (int)$signup->event_fk,
-                        'char_fk' => (int)$signup->char_fk,
-                        'status_fk' => (int)$signup->status_fk,
-                        'signup_note' => (string)$signup->signup_note,
-                        'signup_created' => (string)$signup->signup_created
-                    ]
-                );
+                    $resp = array(
+                        'success' => true,
+                        'data' => [
+                            'attendee_id' => (int)$signup->attendee_id,
+                            'event_fk' => (int)$signup->event_fk,
+                            'char_fk' => (int)$signup->char_fk,
+                            'status_fk' => (int)$signup->status_fk,
+                            'signup_note' => (string)$signup->signup_note,
+                            'signup_created' => (string)$signup->signup_created
+                        ]
+                    );
 
-            } else {
-                $resp = array('success' => false, 'error' => 'Not found');
+                } else {
+                    $resp = array('success' => false, 'error' => 'Not found');
+                }
+            } catch(Exception $ex) {
+                $resp = array('success' => false, 'error' => $ex->getMessage());
             }
-        } catch(Exception $ex) {
-            $resp = array('success' => false, 'error' => $ex->getMessage());
         }
         return json_encode($resp);
     }

@@ -23,8 +23,6 @@ jQuery(document).ready(function($) {
             data: values,
             success: function(response) {
                 if (response.success) {
-                    var d = new Date(response.data.signup_created);
-
                     $('#signup_note').val(response.data.signup_note);
                     $('#box-title').html("Edit status");
                 }
